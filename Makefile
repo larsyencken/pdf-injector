@@ -1,4 +1,4 @@
-.PHONY: all test unittest typecheck checkformatting tidy clean local-ci
+.PHONY: all test unittest typecheck checkformatting tidy clean local-ci build check-dist publish
 
 # Set DOCKER_HOST from docker context for act
 DOCKER_HOST = $(shell docker context inspect --format '{{.Endpoints.docker.Host}}')
@@ -44,3 +44,15 @@ clean:
 # Run CI locally with act
 local-ci:
 	DOCKER_HOST=$(DOCKER_HOST) act -v
+
+# Build package
+build: test
+	uv run python -m build
+
+# Check the distribution before publishing
+check-dist: build
+	uv run twine check dist/*
+
+# Publish package to PyPI
+publish: check-dist
+	uv run twine upload dist/*

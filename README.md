@@ -4,7 +4,17 @@ A tool for injecting invisible text into PDF files. The text is invisible to hum
 
 ## Installation
 
+### From PyPI
+
 ```bash
+pip install pdf-injector
+```
+
+### From Source
+
+```bash
+git clone https://github.com/larsyencken/pdf-injector.git
+cd pdf-injector
 make .venv
 ```
 
@@ -41,6 +51,14 @@ make clean
 ```
 
 ## Usage
+
+### When installed from PyPI
+
+```bash
+pdf-injector input.pdf output.pdf "Text to inject invisibly"
+```
+
+### When running from source
 
 ```bash
 python main.py input.pdf output.pdf "Text to inject invisibly"
