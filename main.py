@@ -17,11 +17,11 @@ def create_invisible_text_layer(text: str, page_size=letter) -> BytesIO:
     # The correct way to set text rendering mode in ReportLab
     # Using setattr to avoid type checking issues with protected attribute
     setattr(c, "_textRenderMode", 3)
-    
+
     # Make the text transparent as a fail-safe
     c.setFillColorRGB(0, 0, 0, 0)
     c.setStrokeColorRGB(0, 0, 0, 0)
-    
+
     # Use a common OCR-friendly font
     c.setFont("Helvetica", 10)
 
@@ -29,7 +29,10 @@ def create_invisible_text_layer(text: str, page_size=letter) -> BytesIO:
     lines = text.split("\n")
     y_position = page_size[1] - 50  # Start near top
     for line in lines:
-        c.drawString(50, y_position, line)
+        t = c.beginText(50, y_position)
+        t.setTextRenderMode(3)  # Invisible text (no fill, no stroke)
+        t.textOut(line)  # Add the text content
+        c.drawText(t)  # Draw the text object to the canvas
         y_position -= 15
 
     c.save()
