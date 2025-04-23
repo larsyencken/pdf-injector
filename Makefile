@@ -5,8 +5,7 @@ all: test
 
 # Virtual environment setup
 .venv:
-	python -m venv .venv
-	.venv/bin/pip install -e ".[dev]"
+	uv sync
 	touch .venv
 
 # Run unit tests
@@ -35,5 +34,6 @@ clean:
 	rm -rf __pycache__
 	rm -rf .pytest_cache
 	rm -rf .ruff_cache
+	rm -rf .pyright
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" -delete
