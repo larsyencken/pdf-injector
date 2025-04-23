@@ -34,3 +34,8 @@ reportMissingTypeStubs = false
 reportMissingImports = false
 reportMissingModuleSource = false
 pythonVersion = "3.12"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]

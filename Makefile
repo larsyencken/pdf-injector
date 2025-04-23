@@ -5,25 +5,25 @@ all: test
 
 # Virtual environment setup
 .venv:
-	uv sync
+	uv sync -e dev
 	touch .venv
 
 # Run unit tests
 unittest: .venv
-	.venv/bin/pytest
+	uv run pytest
 
 # Run type checking
 typecheck: .venv
-	.venv/bin/pyright
+	uv run pyright
 
 # Check code formatting
 checkformatting: .venv
-	.venv/bin/ruff check .
+	uv run ruff check .
 
 # Format code
 tidy: .venv
-	.venv/bin/ruff format .
-	.venv/bin/ruff check --fix .
+	uv run ruff format .
+	uv run ruff check --fix .
 
 # Run all tests
 test: unittest typecheck checkformatting
