@@ -1,4 +1,7 @@
-.PHONY: all test unittest typecheck checkformatting tidy clean
+.PHONY: all test unittest typecheck checkformatting tidy clean local-ci
+
+# Set DOCKER_HOST from docker context for act
+DOCKER_HOST = $(shell docker context inspect --format '{{.Endpoints.docker.Host}}')
 
 # Default target
 all: test
@@ -37,3 +40,7 @@ clean:
 	rm -rf .pyright
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" -delete
+
+# Run CI locally with act
+local-ci:
+	DOCKER_HOST=$(DOCKER_HOST) act -v
