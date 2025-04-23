@@ -9,7 +9,7 @@ from reportlab.pdfgen import canvas
 
 
 def create_invisible_text_layer(text: str, page_size=letter) -> BytesIO:
-    """Create a PDF with invisible text using Text Rendering Mode 3."""
+    """Create a PDF with invisible text using Text Rendering Mode 3 and transparency."""
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=page_size)
 
@@ -17,8 +17,12 @@ def create_invisible_text_layer(text: str, page_size=letter) -> BytesIO:
     # The correct way to set text rendering mode in ReportLab
     # Using setattr to avoid type checking issues with protected attribute
     setattr(c, "_textRenderMode", 3)
-
-    # Use a common font and reasonable size
+    
+    # Make the text transparent as a fail-safe
+    c.setFillColorRGB(0, 0, 0, 0)
+    c.setStrokeColorRGB(0, 0, 0, 0)
+    
+    # Use a common OCR-friendly font
     c.setFont("Helvetica", 10)
 
     # Write text
