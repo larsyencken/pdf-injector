@@ -83,3 +83,17 @@ This tool uses Text Rendering Mode 3 in the PDF specification, which renders tex
 - Uses PyPDF for reading/writing PDF files
 - Uses ReportLab for creating the invisible text layer
 - Applies the invisible text to each page of the input PDF
+
+## Changelog
+
+### 0.1.1 (2025-04-23)
+- Improved text rendering mode implementation for true invisibility
+- Added CI workflow for automated testing
+- Fixed package installation and entry point configuration
+- Added distribution and publishing capabilities 
+- Added command-line tool with pip installation support
+
+### 0.1.0 (2025-04-23)
+- Initial implementation of PDF text injector
+- Support for injecting invisible text into PDF files
+- Basic test suite and documentation
